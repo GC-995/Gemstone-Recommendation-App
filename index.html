@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gemstone Recommendation App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Ruhaan Sharma</p>
+          <h1>Gemstone Recommendation App</h1>
+        </div>
+        <div class="top-actions" aria-label="Global actions">
+          <button class="icon-button" id="resetButton" type="button" title="Reset inputs" aria-label="Reset inputs">
+            <span aria-hidden="true">&#8635;</span>
+          </button>
+          <button class="icon-button" id="printButton" type="button" title="Print report" aria-label="Print report">
+            <span aria-hidden="true">&#9113;</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="panel input-panel" aria-labelledby="profileTitle">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Profile</p>
+              <h2 id="profileTitle">Recommendation inputs</h2>
+            </div>
+            <span class="status-pill" id="profileStatus">Ready</span>
+          </div>
+
+          <form id="recommendationForm">
+            <label>
+              Primary intention
+              <select id="goal" name="goal">
+                <option value="focus">Focus and study discipline</option>
+                <option value="confidence">Confidence and interviews</option>
+                <option value="calm">Calm and emotional balance</option>
+                <option value="creativity">Creativity and communication</option>
+                <option value="protection">Protection and grounding</option>
+              </select>
+            </label>
+
+            <label>
+              Birth month
+              <select id="birthMonth" name="birthMonth">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </label>
+
+            <label>
+              Day-to-day context
+              <select id="lifestyle" name="lifestyle">
+                <option value="campus">Campus and classes</option>
+                <option value="interview">Placements and interviews</option>
+                <option value="active">Commute and active daily wear</option>
+                <option value="events">Events and social occasions</option>
+              </select>
+            </label>
+
+            <label>
+              Color mood
+              <select id="colorTone" name="colorTone">
+                <option value="cool">Cool and refined</option>
+                <option value="warm">Warm and optimistic</option>
+                <option value="soft">Soft and understated</option>
+                <option value="bold">Bold and expressive</option>
+              </select>
+            </label>
+
+            <fieldset>
+              <legend>Budget range</legend>
+              <div class="segmented" role="radiogroup" aria-label="Budget range">
+                <label><input type="radio" name="budget" value="student" checked /> Student</label>
+                <label><input type="radio" name="budget" value="mid" /> Mid</label>
+                <label><input type="radio" name="budget" value="premium" /> Premium</label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Preferred style</legend>
+              <div class="segmented" role="radiogroup" aria-label="Preferred style">
+                <label><input type="radio" name="style" value="minimal" checked /> Minimal</label>
+                <label><input type="radio" name="style" value="statement" /> Statement</label>
+                <label><input type="radio" name="style" value="traditional" /> Traditional</label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Wear format</legend>
+              <div class="segmented" role="radiogroup" aria-label="Wear format">
+                <label><input type="radio" name="wearFormat" value="pendant" checked /> Pendant</label>
+                <label><input type="radio" name="wearFormat" value="ring" /> Ring</label>
+                <label><input type="radio" name="wearFormat" value="bracelet" /> Bracelet</label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Authenticity preference</legend>
+              <div class="segmented" role="radiogroup" aria-label="Authenticity preference">
+                <label><input type="radio" name="authenticity" value="either" checked /> Either</label>
+                <label><input type="radio" name="authenticity" value="natural" /> Natural</label>
+                <label><input type="radio" name="authenticity" value="certified" /> Certified</label>
+              </div>
+            </fieldset>
+
+            <label class="range-label">
+              <span>Durability priority</span>
+              <output id="durabilityOutput" for="durability">7</output>
+              <input id="durability" name="durability" type="range" min="1" max="10" value="7" />
+            </label>
+
+            <label class="range-label">
+              <span>Spiritual openness</span>
+              <output id="opennessOutput" for="openness">6</output>
+              <input id="openness" name="openness" type="range" min="1" max="10" value="6" />
+            </label>
+
+            <label class="checkbox-row">
+              <input id="sensitiveSkin" name="sensitiveSkin" type="checkbox" />
+              Prefer low-irritation wear recommendations
+            </label>
+
+            <label class="checkbox-row">
+              <input id="dailyWear" name="dailyWear" type="checkbox" checked />
+              I want something practical for daily wear
+            </label>
+          </form>
+
+          <aside class="note">
+            This tool gives lifestyle recommendations and does not claim medical, financial, or astrological certainty.
+          </aside>
+        </section>
+
+        <section class="results-column" aria-labelledby="resultsTitle">
+          <div class="toolbar">
+            <div>
+              <p class="eyebrow">Matches</p>
+              <h2 id="resultsTitle">Recommended gemstones</h2>
+            </div>
+            <div class="toolbar-controls">
+              <label>
+                Sort
+                <select id="sortMode">
+                  <option value="score">Best match</option>
+                  <option value="price">Lower cost</option>
+                  <option value="care">Easy care</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="summary-strip" id="summaryStrip" aria-live="polite"></div>
+          <div class="results-grid" id="resultsGrid"></div>
+        </section>
+
+        <aside class="panel shortlist-panel" aria-labelledby="shortlistTitle">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Decision</p>
+              <h2 id="shortlistTitle">Shortlist</h2>
+            </div>
+            <button class="text-button" id="clearShortlist" type="button">Clear</button>
+          </div>
+          <div id="shortlistItems" class="shortlist-items"></div>
+          <div class="compare-box" id="compareBox"></div>
+        </aside>
+      </main>
+    </div>
+
+    <template id="gemCardTemplate">
+      <article class="gem-card">
+        <div class="gem-visual" aria-hidden="true"></div>
+        <div class="gem-content">
+          <div class="card-head">
+            <div>
+              <h3></h3>
+              <p class="subtitle"></p>
+            </div>
+            <span class="score"></span>
+          </div>
+          <p class="why"></p>
+          <dl class="facts"></dl>
+          <div class="tags"></div>
+          <div class="card-actions">
+            <button class="text-button shortlist-toggle" type="button">Shortlist</button>
+            <button class="icon-button details-toggle" type="button" title="Show details" aria-label="Show details">
+              <span aria-hidden="true">v</span>
+            </button>
+          </div>
+          <div class="details" hidden></div>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
